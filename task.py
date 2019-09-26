@@ -35,6 +35,8 @@ class Task():
 
     def get_reward(self, old_angular_v, old_v):
         """Uses current pose of sim to return reward."""
+	if done and self.sim.time < self.sim.runtime:
+	    reward = -1
         distance_from_target = sigmoid(sum(abs(self.sim.pose[:3] - np.float32(self.target_pos))) / 3)
 
         x_distance_from_target = abs(self.sim.pose[0] - np.float32(self.target_pos[0]))
